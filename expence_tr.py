@@ -32,10 +32,13 @@ def init():
 
 
 def user_info():
+    year=2020
+    month=8
+    day=1
     user_info.weeks_no = int(input("Number of weeks:"))
     # today = date.today()
-    today='2020-08-01'
-    # print(today)
+    today=datetime.date(year,month,day)
+    print(today)
     past = datetime.timedelta(weeks=user_info.weeks_no)
     past_day = today - past
     # print(past_day)
@@ -77,10 +80,10 @@ def dis1(today, past_day):
     conn = db.connect("expense.db")
     cur = conn.cursor()
 
-    # sql='''select sum(amount) from expenses_table where dates between AssetNumber=? and AssetNumber=?''', (today, past_day)
 
-    sql = '''select sum(amount) from expenses_table where date2 between {} and {}'''.format(
-        today, past_day)
+    sql='''select sum(amount) from expenses_table where date2 between '2020-07-30' and '2020-08-20' '''
+
+    # sql = "select sum(amount) from expenses_table where date2 between {} and {}".format(today.strftime('%Y-%m-%D'), past_day.strftime('%Y-%m-%D'))
     cur.execute(sql)
     results = cur.fetchall()
     return results
